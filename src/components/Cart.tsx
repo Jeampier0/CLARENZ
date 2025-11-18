@@ -11,6 +11,30 @@ interface CartProps {
 function Cart({ items, isOpen, onClose, updateQuantity }: CartProps) {
   const total = items.reduce((sum, item) => sum + (item.price * item.quantity), 0);
 
+  const handleProceedToPayment = () => {
+    const phoneNumber = '51929300157'; // Número sin espacios ni caracteres especiales
+    let message = '🍕 *PEDIDO - CLARENZ TRATTORIA* 🍕\n\n';
+    message += 'Hola! Me gustaría realizar el siguiente pedido:\n\n';
+    
+    items.forEach((item, index) => {
+      message += `${index + 1}. *${item.name}*\n`;
+      message += `   Cantidad: ${item.quantity}\n`;
+      message += `   Precio unitario: $${item.price.toFixed(2)}\n`;
+      message += `   Subtotal: $${(item.price * item.quantity).toFixed(2)}\n\n`;
+    });
+    
+    message += `━━━━━━━━━━━━━━━━━━━━\n`;
+    message += `💰 *TOTAL: $${total.toFixed(2)}*\n\n`;
+    message += 'Gracias! 🙏';
+    
+    // Codificar el mensaje para la URL
+    const encodedMessage = encodeURIComponent(message);
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+    
+    // Abrir WhatsApp
+    window.open(whatsappUrl, '_blank');
+  };
+
   if (!isOpen) return null;
 
   return (
@@ -84,7 +108,10 @@ function Cart({ items, isOpen, onClose, updateQuantity }: CartProps) {
               <span>Total:</span>
               <span className="text-red-600">${total.toFixed(2)}</span>
             </div>
-            <button className="w-full py-4 bg-red-600 text-white rounded-full font-semibold hover:bg-red-700 transition text-lg">
+            <button 
+              onClick={handleProceedToPayment}
+              className="w-full py-4 bg-red-600 text-white rounded-full font-semibold hover:bg-red-700 transition text-lg"
+            >
               Proceder al Pago
             </button>
           </div>
