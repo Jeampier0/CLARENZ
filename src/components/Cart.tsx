@@ -11,8 +11,14 @@ interface CartProps {
 function Cart({ items, isOpen, onClose, updateQuantity }: CartProps) {
   const total = items.reduce((sum, item) => sum + (item.price * item.quantity), 0);
 
-  const handleProceedToPayment = () => {
-    if (items.length === 0) return;
+  const handleProceedToPayment = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+    
+    if (items.length === 0) {
+      console.warn('El carrito está vacío');
+      return;
+    }
     
     const phoneNumber = '51929300157'; // Número sin espacios ni caracteres especiales
     
@@ -35,13 +41,10 @@ function Cart({ items, isOpen, onClose, updateQuantity }: CartProps) {
     const encodedMessage = encodeURIComponent(message);
     const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
     
-    // Abrir WhatsApp en la misma ventana o nueva pestaña
-    try {
-      window.location.href = whatsappUrl;
-    } catch (error) {
-      console.error('Error al abrir WhatsApp:', error);
-      window.open(whatsappUrl, '_blank');
-    }
+    console.log('Abriendo WhatsApp:', whatsappUrl);
+    
+    // Abrir WhatsApp
+    window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
   };
 
   if (!isOpen) return null;
@@ -118,6 +121,7 @@ function Cart({ items, isOpen, onClose, updateQuantity }: CartProps) {
               <span className="text-red-600">${total.toFixed(2)}</span>
             </div>
             <button 
+              type="button"
               onClick={handleProceedToPayment}
               className="w-full py-4 bg-red-600 text-white rounded-full font-semibold hover:bg-red-700 transition text-lg"
             >
