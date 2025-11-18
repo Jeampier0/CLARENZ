@@ -12,7 +12,11 @@ function Cart({ items, isOpen, onClose, updateQuantity }: CartProps) {
   const total = items.reduce((sum, item) => sum + (item.price * item.quantity), 0);
 
   const handleProceedToPayment = () => {
+    if (items.length === 0) return;
+    
     const phoneNumber = '51929300157'; // Número sin espacios ni caracteres especiales
+    
+    // Construir el mensaje
     let message = '🍕 *PEDIDO - CLARENZ TRATTORIA* 🍕\n\n';
     message += 'Hola! Me gustaría realizar el siguiente pedido:\n\n';
     
@@ -23,7 +27,7 @@ function Cart({ items, isOpen, onClose, updateQuantity }: CartProps) {
       message += `   Subtotal: $${(item.price * item.quantity).toFixed(2)}\n\n`;
     });
     
-    message += `━━━━━━━━━━━━━━━━━━━━\n`;
+    message += '━━━━━━━━━━━━━━━━━━━━\n';
     message += `💰 *TOTAL: $${total.toFixed(2)}*\n\n`;
     message += 'Gracias! 🙏';
     
@@ -31,8 +35,13 @@ function Cart({ items, isOpen, onClose, updateQuantity }: CartProps) {
     const encodedMessage = encodeURIComponent(message);
     const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
     
-    // Abrir WhatsApp
-    window.open(whatsappUrl, '_blank');
+    // Abrir WhatsApp en la misma ventana o nueva pestaña
+    try {
+      window.location.href = whatsappUrl;
+    } catch (error) {
+      console.error('Error al abrir WhatsApp:', error);
+      window.open(whatsappUrl, '_blank');
+    }
   };
 
   if (!isOpen) return null;
