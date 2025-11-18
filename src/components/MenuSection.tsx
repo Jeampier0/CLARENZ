@@ -3,7 +3,6 @@ import { MenuItem } from '../App';
 interface MenuSectionProps {
   addToCart: (item: MenuItem) => void;
 }
-
 const menuItems: MenuItem[] = [
   {
     id: 1,
@@ -57,48 +56,60 @@ const menuItems: MenuItem[] = [
 
 function MenuSection({ addToCart }: MenuSectionProps) {
   return (
-    <section id="menu" className="py-20 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+    <>
+      {/* Hero con imagen */}
+      <section
+        id="inicio"
+        className="relative h-[50vh] mt-8 flex items-center justify-center bg-[url('https://dl.dropboxusercontent.com/scl/fi/ajy5c3gvl39hr16gtlosx/GREEN.jpg?rlkey=fm74hi7fpmqyafqrbsgh8vqm7&st=boux2x0z')] bg-cover bg-top"
+      >
+        {/* Capa oscura para contraste */}
+        <div className="absolute inset-0 bg-black/40"></div>
+
+        <div className="relative z-10 text-center text-white">
+          <h2 className="text-4xl md:text-5xl font-bold mb-4 drop-shadow-lg">
             Nuestro Menú
           </h2>
-          <p className="text-xl text-gray-600">
+          <p className="text-xl drop-shadow-md">
             Pizzas artesanales preparadas con los mejores ingredientes italianos y peruanos
           </p>
         </div>
+      </section>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {menuItems.map((item) => (
-            <div
-              key={item.id}
-              className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300"
-            >
-              <div className="aspect-video overflow-hidden">
-                <img
-                  src={item.image}
-                  alt={item.name}
-                  className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
-                />
-              </div>
-              <div className="p-6">
-                <div className="flex justify-between items-start mb-2">
-                  <h3 className="text-2xl font-bold text-gray-900">{item.name}</h3>
-                  <span className="text-2xl font-bold text-red-600">${item.price}</span>
+      {/* Sección de tarjetas del menú */}
+      <section className="py-16 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {menuItems.map((item) => (
+              <div
+                key={item.id}
+                className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300"
+              >
+                <div className="aspect-video overflow-hidden">
+                  <img
+                    src={item.image}
+                    alt={item.name}
+                    className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
+                  />
                 </div>
-                <p className="text-gray-600 mb-4">{item.description}</p>
-                <button
-                  onClick={() => addToCart(item)}
-                  className="w-full py-3 bg-red-600 text-white rounded-full font-semibold hover:bg-red-700 transition"
-                >
-                  Agregar al Carrito
-                </button>
+                <div className="p-6">
+                  <div className="flex justify-between items-start mb-2">
+                    <h3 className="text-2xl font-bold text-gray-900">{item.name}</h3>
+                    <span className="text-2xl font-bold text-red-600">${item.price}</span>
+                  </div>
+                  <p className="text-gray-600 mb-4">{item.description}</p>
+                  <button
+                    onClick={() => addToCart(item)}
+                    className="w-full py-3 bg-red-600 text-white rounded-full font-semibold hover:bg-red-700 transition"
+                  >
+                    Agregar al Carrito
+                  </button>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 }
 
