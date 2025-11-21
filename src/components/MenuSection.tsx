@@ -8,7 +8,7 @@ const menuItems: MenuItem[] = [
     id: 1,
     name: 'Pizza de Pollo a la Brasa 🔥',
     description: '🍕 FUSIÓN QUE ENAMORA Del 25 al 31 de julio, vive una edición limitada hecha con puro orgullo peruano Jugosa, con ese sabor ahumado y criollo que nos une en cada mordida',
-    price: 12.99,
+    price: 10.99,
     image: 'https://www.dropbox.com/scl/fi/vqiqiz0aays4hhx478xhi/Instagram-3_11_2025-22_36_04.png?rlkey=pt2pt9h8qejafftcu6c81azdo&st=08bz94qx&dl=1',
     category: 'Clásicas'
   },
@@ -16,7 +16,7 @@ const menuItems: MenuItem[] = [
     id: 2,
     name: 'Pan al ajo🥖',
     description: 'Crujiente por fuera, tierno por dentro 💚Impregnado de mantequilla dorada, ajo suave y hierbas frescas que despiertan el apetito desde el primer aroma. 🥖✨ pepinillos',
-    price: 15.99,
+    price: 20.99,
     image: 'https://www.dropbox.com/scl/fi/2uooj9kmgpcvs53dnnzb5/Instagram-3_11_2025-22_36_39.png?rlkey=8pkut37tn8fpreoc2yix34037&st=d31q3sci&dl=1',
     category: 'Especiales'
   },
